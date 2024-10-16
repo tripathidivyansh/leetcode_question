@@ -2,16 +2,45 @@ class Solution {
 public:
     int findKthLargest(vector<int>& nums, int k) {
         int n = nums.size();
-        // sort(nums.begin(), nums.end());
-        // return nums[n-k];
+        priority_queue<int, vector<int>, greater<int>>pq;
 
-        priority_queue<int>pq(nums.begin(), nums.end());
-
-        int ans = 0;
-        while(k--){
-            ans = pq.top();
-            pq.pop();
+        for(auto x: nums){
+            pq.push(x);
+            if(pq.size() > k){
+                pq.pop();
+            }
         }
-        return ans;
+        return pq.top();
+        
     }
 };
+
+
+
+
+// class Solution {
+// public:
+//     int findKthLargest(vector<int>& nums, int k) {
+//         int n = nums.size();
+        
+//         priority_queue<int>pq(nums.begin(), nums.end());
+
+//         int ans = 0;
+//         while(k--){
+//             ans = pq.top();
+//             pq.pop();
+//         }
+//         return ans;
+//     }
+// };
+
+
+
+// class Solution {
+// public:
+//     int findKthLargest(vector<int>& nums, int k) {
+//         int n = nums.size();
+//         sort(nums.begin(), nums.end());
+//         return nums[n-k];
+//     }
+// };
