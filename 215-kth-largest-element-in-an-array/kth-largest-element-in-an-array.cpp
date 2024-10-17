@@ -3,7 +3,6 @@ public:
     int findKthLargest(vector<int>& nums, int k) {
         int n = nums.size();
         priority_queue<int, vector<int>, greater<int>>pq;
-
         for(auto x: nums){
             pq.push(x);
             if(pq.size() > k){
@@ -11,7 +10,6 @@ public:
             }
         }
         return pq.top();
-        
     }
 };
 
