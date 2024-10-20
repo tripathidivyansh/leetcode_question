@@ -1,21 +1,22 @@
 class Solution {
-private:
-    void perm(int pos, vector<int> &nums, vector<vector<int>> &ans) {
-        if (pos >= nums.size()) {
+public:
+
+    vector<vector<int>>ans;
+    void helper(vector<int>&nums, int i){
+        if(i == nums.size()){
             ans.push_back(nums);
             return;
         }
-        for (int i = pos; i < nums.size(); i++) {
-            swap(nums[i], nums[pos]);
-            perm(pos + 1, nums, ans);
-            swap(nums[i], nums[pos]); // backtracking hai. ISSi ko back ttacking bolte hai malik
+
+        for(int j = i; j< nums.size(); j++){
+            swap(nums[i], nums[j]);
+            helper(nums, i+1);
+            swap(nums[i], nums[j]); // this line show the backtracking 
         }
+        return;
     }
-public:
     vector<vector<int>> permute(vector<int>& nums) {
-        vector<vector<int>> ans;
-        perm(0, nums, ans);
-        sort(ans.begin(), ans.end());
+        helper(nums, 0);
         return ans;
     }
 };
