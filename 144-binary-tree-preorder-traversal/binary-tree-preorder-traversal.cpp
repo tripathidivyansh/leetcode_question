@@ -20,7 +20,6 @@ public:
         preorder(root, result);
         return result;
     }
-    
     void preorder(TreeNode* node, vector<int>& result) {
         if (node == nullptr)
             return;
