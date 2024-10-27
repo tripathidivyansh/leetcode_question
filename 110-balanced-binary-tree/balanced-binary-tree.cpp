@@ -13,7 +13,7 @@
 
 class Solution {
 private:
-    int height( TreeNode* node) {
+    int height(struct TreeNode* node) {
         if (node == NULL) {
             return 0;
         }
