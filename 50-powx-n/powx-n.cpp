@@ -1,7 +1,8 @@
 class Solution {
 public:
     double myPow(double x, int n) {
-        double ans = pow(x, n);
-        return ans;
+        // double ans = pow(x, n);
+        // return ans;
+        return pow(x,n);
     }
 };
