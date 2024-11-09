@@ -60,7 +60,7 @@ public:
         int low = 1, high = findMax(piles);
 
         while (low <= high) {
-            int mid = low + (high - low) / 2;
+            int mid = (low+high) / 2;
 
             long long totalH = calculateTotalHorus(piles, mid);  // totalH now uses long long
 
