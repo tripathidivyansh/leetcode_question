@@ -2,7 +2,7 @@ class Solution {
 public:
     int countNegatives(vector<vector<int>>& grid) {
         int n = grid.size();
-        sort(grid.begin(), grid.end());
+        // sort(grid.begin(), grid.end());
 
         int count = 0;
         for(int i = 0; i<n; i++){
