@@ -19,10 +19,10 @@ public:
         if(num < 0){
             return false;
         }
-        int low = 1, high = num;
+        int low = 0, high = num;
         while (low <= high){
-            // long long mid = (low+high)/2;
-            long long mid = low+(high-low)/2;
+            long long mid = (high+low)/2;
+            // long long mid = low+(high-low)/2;
             long long squre = mid*mid;
 
             if(squre == num){
