@@ -22,7 +22,6 @@ public:
         int low = 0, high = num;
         while (low <= high){
             long long mid = (high+low)/2;
-            // long long mid = low+(high-low)/2;
             long long squre = mid*mid;
 
             if(squre == num){
