@@ -8,7 +8,6 @@ public:
         for(int i = 0; i<n; i++){
             total_sum += nums[i];
         }
-
         for(int i = 0; i<n-1; i++){
             left_sum += nums[i];
             long long right_sum = total_sum-left_sum;
