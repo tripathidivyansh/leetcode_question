@@ -14,8 +14,12 @@ public:
         // return (max1-1)*(max2-1);
 
         priority_queue<int>pq;
-        for(int num:nums){
-            pq.push(num);
+        // for(int num:nums){
+        //     pq.push(num);
+        // }
+        int n = nums.size();
+        for(int i = 0; i<n; i++){
+            pq.push(nums[i]);
         }
         int max1 = pq.top();
         pq.pop();
