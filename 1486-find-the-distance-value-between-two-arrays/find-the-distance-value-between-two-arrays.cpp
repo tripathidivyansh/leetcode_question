@@ -40,7 +40,6 @@ public:
                 i++;
             }
         }
-
         return count;
     }
 };
