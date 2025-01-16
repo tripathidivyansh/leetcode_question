@@ -18,7 +18,6 @@ public:
         // }
         // return result;
 
-
         vector<pair<int, string>>people;
         for(int i = 0; i<n; i++){
             people.push_back({heights[i], names[i]});
