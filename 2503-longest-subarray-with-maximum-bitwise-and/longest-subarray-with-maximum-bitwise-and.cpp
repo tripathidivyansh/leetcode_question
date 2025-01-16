@@ -5,11 +5,24 @@ public:
         int count = 0;
         int maxlen = 0;
         int maxele = 0;
-        for(int i = 0; i<n; i++){
-            maxele = max(maxele, nums[i]);
-        }
-        for(int i = 0; i<n; i++){
-            if(nums[i] == maxele){
+        // for(int i = 0; i<n; i++){
+        //     maxele = max(maxele, nums[i]);
+        // }
+        // for(int i = 0; i<n; i++){
+        //     if(nums[i] == maxele){
+        //         count++;
+        //         maxlen = max(maxlen, count);
+        //     }else{
+        //         count = 0;
+        //     }
+        // }
+        // return maxlen;
+        for(int num : nums){
+            if(num > maxele){
+                maxele = num;
+                count = 1;
+                maxlen = 1;
+            }else if(num == maxele){
                 count++;
                 maxlen = max(maxlen, count);
             }else{
