@@ -5,7 +5,7 @@ public:
         if(n == 0) return 0;
         int water = 0;
         int left = 0, right = height.size()-1;
-        int leftmax =0 , rightmax = 0;
+        int leftmax = 0 , rightmax = 0;
 
         while(left<=right){
             if(height[left] <height[right]){
