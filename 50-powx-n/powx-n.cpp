@@ -10,16 +10,14 @@ private:
         double half = mypow1(x, n/2);
         if(n%2 == 0){
             return half*half;
+        }else if(n>0){
+            return  x * half * half;
         }else{
-            return (n > 0) ? x * half * half : (half * half) / x;
+            return (half * half) / x;
         }
     }
 public:
     double myPow(double x, int n) {
-        // double ans = pow(x, n);
-        // return ans;
-        // return pow(x,n);
-
         return mypow1(x,n);
     }
 };
