@@ -20,4 +20,3 @@ public:
         return count*8;
     }
 };
-
