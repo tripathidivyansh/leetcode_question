@@ -6,6 +6,7 @@ public:
             return n;
         }
         int ans = 2;
+        
         vector<unordered_map<int,int>>dp(n);
         for(int i = 1; i<n; i++){
             for(int j = 0; j<i; j++){
