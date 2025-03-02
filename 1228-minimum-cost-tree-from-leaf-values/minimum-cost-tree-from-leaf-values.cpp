@@ -9,11 +9,10 @@ public:
         }
         int ans = INT_MAX;
         for(int i = left; i<right; i++){
-            ans = min(ans, maxi[{left, i}] * maxi[{i+1, right}] + solve(arr, maxi, left, i, dp) + solve(arr, maxi, i+1, right, dp));
+            ans = min(ans, maxi[{left, i}] * maxi[{i+1, right}]+ solve(arr, maxi, left, i, dp) + solve(arr, maxi, i+1, right, dp));
         
         }
         dp[left][right] = ans;
-        // return ans;
         return dp[left][right];
     }
     int mctFromLeafValues(vector<int>& arr) {
