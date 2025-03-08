@@ -14,7 +14,7 @@ public:
             return dp[index][target];
         }
         int include = solve(index+1, nums, n, target-nums[index], dp);
-        int exclude = solve(index+1, nums, n, target-0, dp);
+        int exclude = solve(index+1, nums, n, target, dp);
 
         dp[index][target] = include or exclude;
         return dp[index][target];
