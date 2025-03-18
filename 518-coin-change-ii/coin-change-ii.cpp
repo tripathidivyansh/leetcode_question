@@ -1,6 +1,5 @@
 class Solution {
 public:
-
     int solve(int index, int amount, vector<int>&coins, vector<vector<int>>&dp){
         if(amount == 0){
             return 1;
