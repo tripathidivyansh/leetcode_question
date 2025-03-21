@@ -14,9 +14,8 @@ public:
         }else{
             ans = 1 + min(solve(i+1, j, s, dp), solve(i, j-1, s, dp));
         }
-
         dp[i][j] = ans;
-        return dp[i][j];
+        return ans;
     }
     int minInsertions(string s) {
         int n = s.size();
