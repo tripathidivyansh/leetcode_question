@@ -20,7 +20,7 @@ public:
             return dp[i][j];
         } 
         bool ans = false;
-        if(p[j] == s[i] || p[j] == '?'){
+        if(s[i] == p[j] || p[j] == '?'){
             ans = solve(i+1, j+1, s, p, dp);
         }else if(p[j] == '*'){
             ans = solve(i, j+1, s, p, dp) || solve(i+1, j, s, p, dp);
