@@ -1,28 +1,27 @@
 class Solution {
 public:
-    int solve(vector<int>& nums, int start, int end, vector<int>& dp) {
-        if (start > end) {
+    int solve(int index, int end, vector<int>&nums, vector<int>&dp){
+        if(index > end){
             return 0;
         }
-        if (dp[start] != -1) {
-            return dp[start];
+        if(dp[index] != -1){
+            return dp[index];
         }
-        int include = nums[start] + solve(nums, start + 2, end, dp);
-        int exclude = solve(nums, start + 1, end, dp);
-
-        dp[start] = max(include, exclude);
-        return dp[start];
+        int include = nums[index] + solve(index+2, end, nums, dp);
+        int exclude = solve(index+1, end, nums, dp);
+        dp[index] = max(include, exclude);
+        return dp[index];
     }
-
     int rob(vector<int>& nums) {
         int n = nums.size();
-        if (n == 1) return nums[0];
+        if(nums.size() == 1){
+            return nums[0];
+        }
+        vector<int>dp1(n+1, -1);
+        vector<int>dp2(n+2, -1);
 
-        vector<int> dp1(n+1, -1);
-        vector<int> dp2(n+1, -1);
-
-        int case1 = solve(nums, 0, n - 2, dp1);
-        int case2 = solve(nums, 1, n - 1, dp2); 
+        int case1 = solve(0, n-2, nums,  dp1);
+        int case2 = solve(1, n-1, nums,  dp2);
 
         return max(case1, case2);
     }
