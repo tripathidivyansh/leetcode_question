@@ -12,9 +12,9 @@
 class Solution {
 public:
 
-    void solve(TreeNode* root, int level, int &maxDeafth, int &leftVal){
+    int solve(TreeNode* root, int level, int &maxDeafth, int &leftVal){
         if(root == NULL){
-            return;
+            return 0;
         }
         if(level > maxDeafth){
             maxDeafth = level;
@@ -22,11 +22,13 @@ public:
         }
         solve(root->left, level+1, maxDeafth, leftVal);
         solve(root->right, level+1, maxDeafth, leftVal);
+        return leftVal;
     }
+
     int findBottomLeftValue(TreeNode* root) {
         int maxDeafth = -1;
         int leftVal = 0;
-        solve(root, 0, maxDeafth, leftVal);
-        return leftVal;
+        return solve(root, 0, maxDeafth, leftVal);
+        
     }
 };
