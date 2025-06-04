@@ -11,7 +11,6 @@
  */
 class Solution {
 public:
-
     void solve(TreeNode* root, vector<int>&ans, int level){
         if(root == NULL){
             return;
