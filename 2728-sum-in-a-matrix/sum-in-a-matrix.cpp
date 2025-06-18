@@ -6,7 +6,7 @@ public:
         int m = nums[0].size();
 
         for(int i = 0; i<n; i++){
-            sort(nums[i].begin(), nums[i].end(), greater<int>());
+            sort(nums[i].begin(), nums[i].end());
         }
         for(int j = 0; j<m; j++){
             int maxi = INT_MIN;
