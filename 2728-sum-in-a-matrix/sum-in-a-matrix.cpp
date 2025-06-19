@@ -1,10 +1,9 @@
 class Solution {
 public:
 
-    void solve(vector<vector<int>>&nums, int &Sum){
+    void solve(vector<vector<int>>& nums, int &Sum){
         int n = nums.size();
         int m = nums[0].size();
-
         for(int i = 0; i<n; i++){
             sort(nums[i].begin(), nums[i].end());
         }
