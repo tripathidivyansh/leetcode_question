@@ -15,7 +15,7 @@ public:
             return;
         }
         
-        for(int i = n-1; i>= ind; i--){
+        for(int i = n-1; i> ind; i--){
             if(nums[i] > nums[ind]){
                 swap(nums[i], nums[ind]);
                 break;
