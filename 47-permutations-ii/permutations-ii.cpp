@@ -1,21 +1,33 @@
 class Solution {
 public:
+    void solve(vector<int>& nums, unordered_map<int, int>& mp, vector<int>& temp, vector<vector<int>>& result) {
+        if(temp.size() == nums.size()) {
+            result.push_back(temp);
 
-    void solve(int index, vector<int>&nums, set<vector<int>>&result){
-        if(index >= nums.size()){
-            result.insert(nums);
             return;
         }
-        for(int i = index; i<nums.size(); i++){
-            swap(nums[index], nums[i]);
-            solve(index+1, nums, result);
-            swap(nums[index], nums[i]);
+        for(auto& [num, count] : mp) {
+            if(count == 0) continue;
+
+            temp.push_back(num);
+            mp[num]--;
+            solve(nums, mp, temp, result);
+            temp.pop_back();
+            mp[num]++;
+            
         }
     }
-    vector<vector<int>> permuteUnique(vector<int>& nums) {
-        set<vector<int>>result;
-        solve(0, nums, result);
 
-        return vector<vector<int>>(result.begin(), result.end());
+    vector<vector<int>> permuteUnique(vector<int>& nums) {
+        unordered_map<int, int> mp;
+        vector<vector<int>> result;
+
+        for(int num : nums) {
+            mp[num]++;
+        }
+
+        vector<int> temp;
+        solve(nums, mp, temp, result);
+        return result;
     }
 };
