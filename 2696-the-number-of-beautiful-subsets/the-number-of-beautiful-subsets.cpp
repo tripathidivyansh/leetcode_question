@@ -1,27 +1,26 @@
 class Solution {
 public:
-    void solve(int index, vector<int>& nums, unordered_map<int,int>& mp, int& result, int k) {
-        if(index >= nums.size()) {
-            result++; 
 
-            return;
-        }        
-        if(mp[nums[index] - k] == 0 && mp[nums[index] + k] == 0) {
+    void solve(vector<int>&nums, int index, unordered_map<int,int>&mp, int k, int &result){
+        if(index >= nums.size()){
+
+            if(!mp.empty()){
+                result++;
+                return;
+            }
+        }
+        if(mp[nums[index] - k] == 0 && mp[nums[index] + k] == 0){
             mp[nums[index]]++;
-            solve(index + 1, nums, mp, result, k);
+            solve(nums, index+1, mp, k, result);
             mp[nums[index]]--;
         }
-        solve(index + 1, nums, mp, result, k);
+        solve(nums, index+1, mp, k, result);
     }
     int beautifulSubsets(vector<int>& nums, int k) {
-
-        unordered_map<int,int> mp;
+        unordered_map<int,int>mp;
         int result = 0;
-        solve(0, nums, mp, result, k);
+
+        solve(nums, 0, mp, k, result);
         return result-1;
-        // empty subset is also calculate that way we reduce the time complexity.
-        // or change the baSe caSe where if(!mp.empty()){
-            //result ++;
-        //}
     }
 };
