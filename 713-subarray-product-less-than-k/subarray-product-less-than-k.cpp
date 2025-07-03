@@ -5,21 +5,18 @@ public:
         if(k <= 1){
             return 0;
         }
-        long long product = 1;
-        long long count = 0;
-        int left = 0;
-        int right = 0;
-        while( right < n){
-            product *= nums[right];
-
-            while(product >= k && left <= right){
-                product /= nums[left];
-                left++;
+        long long count = 0, product = 1;
+        int l = 0, r = 0;
+        while(r < nums.size()){
+            product *= nums[r];
+            while(product >= k && l<=r){
+                product /= nums[l];
+                l++;
             }
-            count += right-left + 1;
-            right++;
-        }
+            count += (r-l+1);
 
+            r++;
+        }
         return count;
     }
 };
