@@ -11,10 +11,12 @@ public:
         return true;
     }
     int solve(int index, string &s, vector<int>& dp) {
-        if(index == s.size()) return 0; 
-        if(dp[index] != -1) return dp[index];
+        if(index >= s.size()) 
+            return 0; 
+        if(dp[index] != -1) 
+            return dp[index];
         int minCuts = INT_MAX;
-        
+
         for(int i = index; i < s.size(); i++) {
             if(isPalindrome(index, i, s)) {
                 int cuts = 1 + solve(i + 1, s, dp);
