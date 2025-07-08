@@ -1,59 +1,27 @@
 class Solution {
 public:
-    vector<int> asteroidCollision(vector<int>& a) {
+    vector<int> asteroidCollision(vector<int>& asteroids) {
         stack<int>s;
-        int n = a.size();
-        for(int i = 0; i<n; i++){
-            if(a[i] > 0){
-                s.push(a[i]);
+        for(int i = 0; i<asteroids.size(); i++){
+            if(asteroids[i] > 0){
+                s.push(asteroids[i]);
             }else{
-                while(!s.empty() && s.top()> 0 && s.top() < abs(a[i])){
+                while(!s.empty() && s.top() > 0 && s.top() < abs(asteroids[i])){
                     s.pop();
                 }
-                if(!s.empty() && s.top() == abs(a[i])){
+                if(!s.empty() && s.top() == abs(asteroids[i])){
                     s.pop();
                 }else if(s.empty() || s.top() < 0){
-                    s.push(a[i]);
+                    s.push(asteroids[i]);
                 }
             }
         }
-        vector<int> result;
-        while(!s.empty()) {
-            result.insert(result.begin(), s.top());
+        vector<int>result;
+        while(!s.empty()){
+            result.push_back(s.top());
             s.pop();
         }
+        reverse(result.begin(), result.end());
         return result;
     }
 };
-
-
-// class Solution {
-// public:
-//     vector<int> asteroidCollision(vector<int>& a) {
-//         stack<int> s;
-//         int n = a.size();
-        
-//         for(int i = 0; i < n; i++) {
-//             if(a[i] > 0) {
-//                 s.push(a[i]);
-//             } else {
-//                 while(!s.empty() && s.top() > 0 && s.top() < abs(a[i])) {
-//                     s.pop();
-//                 }
-//                 if(!s.empty() && s.top() == abs(a[i])) {
-//                     s.pop();
-//                 } else if(s.empty() || s.top() < 0) {
-//                     s.push(a[i]);
-//                 }
-//             }
-//         }
-        
-//         vector<int> result;
-//         while(!s.empty()) {
-//             result.insert(result.begin(), s.top());
-//             s.pop();
-//         }
-        
-//         return result;
-//     }
-// };
