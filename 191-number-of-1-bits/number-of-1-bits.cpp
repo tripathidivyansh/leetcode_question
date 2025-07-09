@@ -1,22 +1,14 @@
 class Solution {
 public:
     int hammingWeight(int n) {
-        string binary = "";    
-        int temp = n;         
+        long long count = 0;
+        while(n != 0){
 
-        if(temp == 0) binary = "0";
-        while(temp > 0){
-            binary = to_string(temp % 2) + binary;
-            temp /= 2;
-        }
-
-        int count = 0;
-        for(char c : binary){
-            if(c == '1'){
+            if(n & 1){
                 count++;
             }
+            n >>= 1;
         }
-
         return count;
     }
 };
