@@ -1,24 +1,24 @@
 class Solution {
 public:
-
-    void solve(int index, vector<int>&ds, vector<int>&nums, vector<vector<int>>&result){
-        if(index == nums.size()){
-            result.push_back(ds);
+    void solve(int index, vector<int>&nums, vector<vector<int>>&result, vector<int>&path){
+        if(index >= nums.size()){
+            result.push_back(path);
             return;
         }
-        ds.push_back(nums[index]);
-        solve(index+1, ds, nums, result);
-        ds.pop_back();
+        path.push_back(nums[index]);
+        solve(index+1, nums, result, path);
         while(index + 1 < nums.size() && nums[index] == nums[index+1]){
             index++;
         }
-        solve(index+1, ds, nums, result);
+        path.pop_back();
+        solve(index+1, nums, result, path);
     }
     vector<vector<int>> subsetsWithDup(vector<int>& nums) {
         vector<vector<int>>result;
-        vector<int>ds;
+        vector<int>path;
+
         sort(nums.begin(), nums.end());
-        solve(0, ds, nums, result);
+        solve(0, nums, result, path);
         return result;
     }
 };
