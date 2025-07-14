@@ -37,7 +37,7 @@ public:
                 }
             }
 
-            if (flag) reverse(level.begin(), level.end()); 
+            if (flag == true) reverse(level.begin(), level.end()); 
             ans.push_back(level);
             flag = !flag;
         }
