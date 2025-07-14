@@ -4,25 +4,26 @@ public:
         int n = arr.size();
         int maxLen = 0;
 
-        int i = 1;
-        while (i < n - 1) {
+        for (int i = 1; i < n - 1; ) {
             if (arr[i - 1] < arr[i] && arr[i] > arr[i + 1]) {
-                int left = i - 1;
-                int right = i + 1;
-                while (left > 0 && arr[left - 1] < arr[left]) {
-                    left--;
+                int count = 1;
+                int j = i;
+                while (j > 0 && arr[j] > arr[j - 1]) {
+
+                    j--;
+                    count++;
                 }
-                while (right < n - 1 && arr[right] > arr[right + 1]) {
-                    right++;
+                while (i < n - 1 && arr[i] > arr[i + 1]) {
+                    
+                    i++;
+                    count++;
                 }
-                maxLen = max(maxLen, right - left + 1);
-                i = right;  
+                maxLen = max(maxLen, count);
             } else {
                 i++;
             }
         }
 
         return maxLen;
-
     }
 };
