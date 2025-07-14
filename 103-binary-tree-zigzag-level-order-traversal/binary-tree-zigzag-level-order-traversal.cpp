@@ -23,25 +23,27 @@ public:
             int Size = q.size();
             vector<int> level;
 
+
             for (int i = 0; i < Size; i++) {
                 TreeNode* node = q.front();
                 q.pop();
-                level.push_back(node->val);
 
-            
-                if (node->left != NULL) {
-                    q.push(node->left);
+                if (flag == true) {
+                    level.insert(level.begin(), node->val);
                 }
-                if (node->right != NULL) {
-                    q.push(node->right);
+                if (flag == false) {
+                    level.push_back(node->val);
                 }
+
+                if (node->left != NULL) q.push(node->left);
+                if (node->right != NULL) q.push(node->right);
             }
 
-            if (flag == true) reverse(level.begin(), level.end()); 
             ans.push_back(level);
             flag = !flag;
         }
 
         return ans;
+
     }
 };
