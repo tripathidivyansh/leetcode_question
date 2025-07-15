@@ -9,22 +9,21 @@
  *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
  * };
  */
-
-void solve(TreeNode* root, vector<int>&ans, int level){
-    if(root == NULL){
-        return;
-    }
-    if(level == ans.size()){
-        ans.push_back(root->val);
-    }
-    solve(root->right, ans, level+1);
-    solve(root->left, ans, level+1);
-}
 class Solution {
 public:
+    void solve(int level, TreeNode* root, vector<int>&ans){
+        if(root == NULL) return;
+        if(level == ans.size()){
+
+            ans.push_back(root->val);
+        }
+        solve(level + 1, root->right, ans);
+        solve(level + 1, root->left, ans);
+    }
     vector<int> rightSideView(TreeNode* root) {
         vector<int>ans;
-        solve(root, ans, 0);
+        solve(0, root, ans);
+
         return ans;
     }
 };
