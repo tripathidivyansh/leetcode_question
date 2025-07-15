@@ -20,7 +20,7 @@ public:
         while(!q.empty()){
             int maxelement = INT_MIN;
             int Size = q.size();
-            while(Size--){
+            for(int i = 0; i<Size; i++){
                 TreeNode* node = q.front();
                 q.pop();
 
