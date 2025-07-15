@@ -11,7 +11,6 @@
  */
 class Solution {
 public:
-
     int height(TreeNode* root){
         if(root == NULL){
             return 0;
@@ -34,6 +33,7 @@ public:
         if(left && right && diff){
             return true;
         }
+        
         return false;
     }
 };
