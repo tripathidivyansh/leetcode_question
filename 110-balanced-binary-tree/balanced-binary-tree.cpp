@@ -18,10 +18,9 @@ public:
         int r = solve(root->right, result);
         if(abs(l-r) > 1){
             result = false;
-            return 0;
         }
 
-        
+
         return 1 + max(l,r);
     }
     bool isBalanced(TreeNode* root) {
