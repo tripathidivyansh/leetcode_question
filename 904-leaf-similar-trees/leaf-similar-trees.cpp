@@ -1,28 +1,32 @@
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+ * };
+ */
 class Solution {
 public:
-    void getLeafNodes(TreeNode* root, vector<int> &leaves) {
-        if (root == NULL) return;
+    void solve(TreeNode* root, vector<int>& leaves){
+        if(root == NULL) return;
+        if(root->left == NULL && root->right == NULL){
 
-        
-        if (root->left == NULL && root->right == NULL) {
             leaves.push_back(root->val);
             return;
         }
-        getLeafNodes(root->left, leaves);
-        getLeafNodes(root->right, leaves);
+        solve(root->left, leaves);
+        solve(root->right, leaves);
     }
     bool leafSimilar(TreeNode* root1, TreeNode* root2) {
-        if (root1 == NULL && root2 == NULL) {
-            return true;
-        }
-        if ((root1 == NULL && root2 != NULL) || (root1 != NULL && root2 == NULL)) {
-            return false;
-        }
-        vector<int> leaf1, leaf2;
-        getLeafNodes(root1, leaf1);
-        getLeafNodes(root2, leaf2);
+        vector<int>leaves1, leaves2;
+        solve(root1, leaves1);
 
-        return leaf1 == leaf2;
-        
+        solve(root2, leaves2);
+        return leaves1 == leaves2;
+
     }
 };
