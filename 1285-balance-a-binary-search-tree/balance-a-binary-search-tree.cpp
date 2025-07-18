@@ -11,31 +11,25 @@
  */
 class Solution {
 public:
-    void inorder(TreeNode* root, vector<int>& in) {
-        if (root == NULL) {
-            return;
-        }
-        inorder(root->left, in);
-        in.push_back(root->val);
-        inorder(root->right, in);
+    void inorder(TreeNode* root, vector<int>&ans){
+        if(root == NULL) return;
+        inorder(root->left, ans);
+
+        ans.push_back(root->val);
+        inorder(root->right, ans);
     }
+    TreeNode* solve(vector<int>&ans, int Start, int end){
+        if(Start > end) return NULL;
+        int mid = Start + (end-Start) /2;
 
-    TreeNode* inordertobSt(int s, int e, vector<int>& in) {
-        if (s > e) {
-            return NULL;
-        }
-        int mid = (s + e) / 2;
-        
-        TreeNode* root = new TreeNode(in[mid]);
-
-        root->left = inordertobSt(s, mid - 1, in);
-        root->right = inordertobSt(mid + 1, e, in);
-        return root;
+        TreeNode* newNode = new TreeNode(ans[mid]);
+        newNode->left = solve(ans, Start, mid-1);
+        newNode->right = solve(ans, mid+1, end);
+        return newNode;
     }
-
     TreeNode* balanceBST(TreeNode* root) {
-        vector<int> in;
-        inorder(root, in);
-        return inordertobSt(0, in.size() - 1, in);
+        vector<int>ans;
+        inorder(root, ans);
+        return solve(ans, 0, ans.size()-1);
     }
 };
