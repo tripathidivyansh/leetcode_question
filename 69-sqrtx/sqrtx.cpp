@@ -1,16 +1,24 @@
 class Solution {
 public:
-    int mySqrt(int x) {
-        if(x <=1) return x;
+    int binarySearch(int x){
+        if(x <= 1) return x;
+        int S = 0, e = x-1;
         long long ans = 0;
-        for(int i = 1; i<=x; i++){
-            long long ans1 = 1LL * i * i;
-            if(ans1 <= x){
-                ans = i;
+        while(S <=e){
+            long long mid = S + (e-S)/2;
+            long long Squre = mid*mid;
+            if(Squre == x){
+                return mid;
+            }else if(Squre < x){
+                ans = mid;
+                S = mid+1;
             }else{
-                break;
+                e = mid-1;
             }
         }
         return ans;
+    }
+    int mySqrt(int x) {
+        return binarySearch(x);
     }
 };
