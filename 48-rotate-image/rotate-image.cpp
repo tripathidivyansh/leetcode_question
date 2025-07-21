@@ -4,16 +4,20 @@ public:
         int n = matrix.size();
         int m = matrix[0].size();
 
+        // for(int i = 0; i<n; i++){
+        //     for(int j = 0; j<i; j++){
+        //         swap(matrix[i][j], matrix[j][i]);
+        //     }
+        // }
+        // for(int i = 0; i<n; i++){
+        //     reverse(matrix[i].begin(), matrix[i].end());
+        // }
+        vector<vector<int>>temp(n, vector<int>(m));
         for(int i = 0; i<n; i++){
-            for(int j = i+1; j<m; j++){
-                swap(matrix[i][j], matrix[j][i]);
+            for(int j = 0; j<m; j++){
+                temp[j][n-1-i] = matrix[i][j];
             }
         }
-        for(int i = 0; i<n; i++){
-            reverse(matrix[i].begin(), matrix[i].end());
-        }
+        matrix = temp;
     }
 };
-
-
-
