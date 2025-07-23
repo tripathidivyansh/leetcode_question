@@ -22,7 +22,7 @@ public:
             for(int i = 0; i<4; i++){
                 int di = x + dx[i];
                 int dj = y + dy[i];
-                while(di >= 0 && dj >= 0 && di < n && dj < m && !visited[di][dj]){
+                if(di >= 0 && dj >= 0 && di < n && dj < m && !visited[di][dj]){
                     q.push({di, dj});
                     visited[di][dj] = true;
                     mat[di][dj] = mat[x][y] + 1;
