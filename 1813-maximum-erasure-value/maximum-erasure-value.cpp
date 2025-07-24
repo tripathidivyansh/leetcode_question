@@ -1,20 +1,24 @@
 class Solution {
 public:
     int maximumUniqueSubarray(vector<int>& nums) {
-        unordered_set<int> seen;
-        int start = 0, currSum = 0, maxSum = 0;
+        unordered_set<int> S;
+        int Sum = 0, maxSum = 0;
+        int i = 0, j = 0;
 
-        for (int end = 0; end < nums.size(); ++end) {
-            while (seen.count(nums[end])) {
-                seen.erase(nums[start]);
-                currSum -= nums[start];
-                start++;
+        while (j < nums.size()) {
+            if (!S.count(nums[j])) {
+                Sum += nums[j];
+                maxSum = max(maxSum, Sum);
+                S.insert(nums[j]);
+                j++;
+            } else {
+                while (i < nums.size() && S.count(nums[j])) {
+                    Sum -= nums[i];        
+                    S.erase(nums[i]);       
+                    i++;                   
+                }
             }
-            seen.insert(nums[end]);
-            currSum += nums[end];
-            maxSum = max(maxSum, currSum);
         }
-
         return maxSum;
     }
 };
