@@ -1,38 +1,45 @@
 class Solution {
 public:
+    bool solvedfS(int node, vector<bool>& visited, vector<bool>& dfSvisited, vector<vector<int>>& adj) {
+        visited[node] = true;
+        dfSvisited[node] = true;
+
+        for (auto neighbour : adj[node]) {
+            if (!visited[neighbour]) {
+                if (solvedfS(neighbour, visited, dfSvisited, adj)) {
+                    return true; 
+                }
+            } else if (dfSvisited[neighbour]) {
+                return true;  
+            }
+        }
+
+        dfSvisited[node] = false;
+        return false;
+    }
+
     bool canFinish(int numCourses, vector<vector<int>>& prerequisites) {
         int V = numCourses;
         vector<vector<int>> adj(V);
-
-        vector<int> indegree(V, 0);
         for (int i = 0; i < prerequisites.size(); i++) {
             int u = prerequisites[i][0];
             int v = prerequisites[i][1];
             adj[v].push_back(u);
-            indegree[u]++;
         }
 
-        queue<int> q;
+        vector<bool> visited(V, false);
+        vector<bool> dfSvisited(V, false);
+
         for (int i = 0; i < V; i++) {
-            if (indegree[i] == 0) {
-                q.push(i);
-            }
-        }
-        int count = 0;
-        while (!q.empty()) {
-            int node = q.front();
-            q.pop();
-            count++;
-
-            for (int neighbour : adj[node]) {
-                indegree[neighbour]--;
-                if (indegree[neighbour] == 0) {
-                    q.push(neighbour);
+            if (!visited[i]) {
+                if (solvedfS(i, visited, dfSvisited, adj)) {
+                    return false;  
                 }
             }
-
         }
-        return count == numCourses;
 
+        return true; 
     }
+
+
 };
