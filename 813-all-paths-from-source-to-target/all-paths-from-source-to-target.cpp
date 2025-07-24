@@ -4,10 +4,9 @@ public:
         path.push_back(index);
         if(index >= graph.size()-1){
             result.push_back(path);   
-        }else{
-            for(int next : graph[index]){
-                solve(next, graph, path, result);
-            }
+        }
+        for(int next : graph[index]){
+            solve(next, graph, path, result);
         }
         path.pop_back();
     }
