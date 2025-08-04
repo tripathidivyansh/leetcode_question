@@ -1,30 +1,34 @@
 class Solution {
 public:
     long long minCost(vector<int>& basket1, vector<int>& basket2) {
-        int m = INT_MAX;
-        unordered_map<int, int> frequency_map;
-        for (int b1 : basket1) {
-            frequency_map[b1]++;
-            m = min(m, b1);
+        unordered_map<int,int>mp;
+        int minEle = INT_MAX; 
+        for(int &x : basket1){
+            mp[x]++;
+            minEle = min(minEle, x);
         }
-        for (int b2 : basket2) {
-            frequency_map[b2]--;
-            m = min(m, b2);
+        for(int &x : basket2){
+            mp[x]--;
+            minEle = min(minEle, x);
         }
-        vector<int> merge;
-        for (auto [k, c] : frequency_map) {
-            if (c % 2 != 0) {
-                return -1;
+        vector<int>finallist;
+        for(auto &it: mp){
+            int coSt = it.first;
+            int count = it.second;
+            if(count == 0){
+                continue;
             }
-            for (int i = 0; i < abs(c) / 2; ++i) {
-                merge.push_back(k);
+            if(count % 2 != 0) return -1;
+            for(int c = 1; c <= abs(count/2); c++){
+                finallist.push_back(coSt);
             }
         }
-        nth_element(merge.begin(), merge.begin() + merge.size() / 2,
-                    merge.end());
-        return accumulate(merge.begin(), merge.begin() + merge.size() / 2, 0ll,
-                          [&](long long res, int x) -> long long {
-                              return res + min(2 * m, x);
-                          });
+        
+        sort(begin(finallist), end(finallist));
+        long long reSult = 0;
+        for(int i = 0; i<finallist.size()/2; i++){
+            reSult += min(finallist[i], minEle*2);
+        }
+        return reSult;
     }
 };
