@@ -23,8 +23,9 @@ public:
                 finallist.push_back(coSt);
             }
         }
-        
-        sort(begin(finallist), end(finallist));
+
+        // sort(begin(finallist), end(finallist));
+        sort(finallist.begin(), finallist.end());
         long long reSult = 0;
         for(int i = 0; i<finallist.size()/2; i++){
             reSult += min(finallist[i], minEle*2);
