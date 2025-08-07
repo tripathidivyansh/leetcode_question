@@ -17,7 +17,7 @@ public:
             }
         }
         if (ind == -1) return -1;
-        for (int i = size - 1; i > ind; i--) {
+        for (int i = size - 1; i >= ind; i--) {
             if (digits[i] > digits[ind]) {
                 swap(digits[i], digits[ind]);
                 break;
