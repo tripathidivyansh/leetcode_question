@@ -1,19 +1,23 @@
 class Solution {
 public:
-    int jump(vector<int>& nums) {
+    int dpJump(int i, vector<int>& nums, vector<int>& dp) {
         int n = nums.size();
-        if(n<= 1){
-            return 0;
-        }
-        int jumpS = 0, curr = 0,next = 0;
-        for(int i = 0; i<n-1; i++){
-            next = max(next, i+nums[i]);
+        if (i >= n - 1) return 0; 
 
-            if(i == curr){
-                jumpS++;
-                curr = next;
+        if (dp[i] != -1) return dp[i];
+        int ans = 1e9;
+        for (int j = 1; j <= nums[i]; j++) {
+            if (i + j < n) {
+                ans = min(ans, 1 + dpJump(i + j, nums, dp));
             }
         }
-        return jumpS;
+
+        return dp[i] = ans;
+    }
+
+    int jump(vector<int>& nums) {
+        int n = nums.size();
+        vector<int> dp(n, -1);
+        return dpJump(0, nums, dp);
     }
 };
