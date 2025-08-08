@@ -18,18 +18,15 @@ public:
         if(root == NULL) return ans;
         q.push(root);
         while(!q.empty()){
-            int size = q.size();
+            int Size = q.size();
             vector<int>level;
-            for(int i = 0; i<size; i++){
+            for(int i = 0; i<Size; i++){
                 TreeNode* node = q.front();
                 q.pop();
+                
                 level.push_back(node->val);
-                if(node->left != NULL){
-                    q.push(node->left);
-                }
-                if(node->right != NULL){
-                    q.push(node->right);
-                }
+                if(node->left != NULL) q.push(node->left);
+                if(node->right != NULL) q.push(node->right);
             }
             ans.push_back(level);
         }
