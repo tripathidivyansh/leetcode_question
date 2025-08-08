@@ -1,13 +1,13 @@
 class Solution {
 public:
 
-    bool solve(vector<int>&bills){
-        int n = bills.size();
+    bool solve(vector<int>& bills){
         int five = 0, ten = 0;
+        int n = bills.size();
 
         for(int i = 0; i<n; i++){
             if(bills[i] == 5){
-                five = five + 1;
+                five = five+1;
             }else if(bills[i] == 10){
                 if(five){
                     five -= 1;
@@ -28,6 +28,7 @@ public:
         }
         return true;
     }
+
     bool lemonadeChange(vector<int>& bills) {
         return solve(bills);
     }
