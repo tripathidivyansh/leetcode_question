@@ -1,17 +1,18 @@
 class Solution {
 public:
-    bool solve(int index, vector<int>& nums) {
+    bool solve(vector<int>&nums){
         int maxindex = 0;
-        for (int i = 0; i < nums.size(); i++) {
-            if (i > maxindex) {
-                return false; 
+        for(int i = 0; i<nums.size(); i++){
+
+            if(i > maxindex){
+                return false;
             }
             maxindex = max(maxindex, i + nums[i]);
         }
         return true;
     }
-
     bool canJump(vector<int>& nums) {
-        return solve(0, nums);
+        return solve(nums);
     }
+    
 };
