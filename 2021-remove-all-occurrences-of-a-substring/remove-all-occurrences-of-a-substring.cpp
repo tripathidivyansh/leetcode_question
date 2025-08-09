@@ -1,17 +1,22 @@
 class Solution {
 public:
-    string Solve(string s, string part){
-        if(part.size() > s.size()) return s;
-        
-        while (s.find(part) != string::npos) {
-            size_t pos = s.find(part);
-            s.erase(pos, part.size());
-        }
-        
-        return s; 
-    }
-    
     string removeOccurrences(string s, string part) {
-        return Solve(s, part);
+        while(true){
+            int idx = s.find(part);
+            
+            if(idx == string::npos){
+                break;
+            }
+
+            s.erase(idx, part.length());
+        }
+        return s;
     }
+
+
+
+
+
+
+
 };
