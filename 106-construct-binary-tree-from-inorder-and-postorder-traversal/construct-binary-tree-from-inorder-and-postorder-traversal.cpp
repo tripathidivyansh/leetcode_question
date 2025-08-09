@@ -9,43 +9,30 @@
  *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
  * };
  */
-/**
- * Definition for a binary tree node.
- * struct TreeNode {
- *     int val;
- *     TreeNode *left;
- *     TreeNode *right;
- *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
- *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
- *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
- * };
- */
 class Solution {
 public:
-    void createMapping(vector<int>& inorder, unordered_map<int, int>& nodeToIndex) {
-        for (int i = 0; i < inorder.size(); i++) {
-            nodeToIndex[inorder[i]] = i;
+    TreeNode* Solve(vector<int>&inorder, vector<int>&postorder, int inStart, int inend, int postStart, int postend){
+        if(inStart > inend) return NULL;
+        TreeNode* root = new TreeNode(postorder[postend]);
+
+        int pos = inStart;
+        for(; pos<= inend; pos++){
+            if(inorder[pos] == root->val){
+                break;
+            }
         }
-    }
-
-    TreeNode* buildTreeHelper(vector<int>& inorder, vector<int>& postorder, int& postIndex, int inorderStart, int inorderEnd, unordered_map<int, int>& nodeToIndex) {
-        if (postIndex < 0 || inorderStart > inorderEnd) {
-            return nullptr;
-        }
-
-        int rootVal = postorder[postIndex--];
-        TreeNode* root = new TreeNode(rootVal);
-        int inorderIndex = nodeToIndex[rootVal];
-
-        root->right = buildTreeHelper(inorder, postorder, postIndex, inorderIndex + 1, inorderEnd, nodeToIndex);
-        root->left = buildTreeHelper(inorder, postorder, postIndex, inorderStart, inorderIndex - 1, nodeToIndex);
-
+        int leftSize = pos-inStart;
+        int rightSize = inend - pos;
+        root->left = Solve(inorder, postorder, inStart, pos-1, postStart, postStart + leftSize-1);
+        root->right = Solve(inorder, postorder, pos+1, inend, postend-rightSize, postend-1);
         return root;
     }
     TreeNode* buildTree(vector<int>& inorder, vector<int>& postorder) {
-        unordered_map<int, int> nodeToIndex;
-        createMapping(inorder, nodeToIndex);
-        int postIndex = postorder.size() - 1;
-        return buildTreeHelper(inorder, postorder, postIndex, 0, inorder.size() - 1, nodeToIndex);
+        int n = inorder.size();
+        int inStart = 0, inend = n-1;
+
+        int postStart = 0, postend = n-1;
+        return Solve(inorder, postorder, inStart, inend, postStart, postend);
     }
+
 };
