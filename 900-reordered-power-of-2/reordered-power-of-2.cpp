@@ -1,21 +1,18 @@
 class Solution {
 public:
-    bool reorderedPowerOf2(int n) {
-        string ans = "";
-        while(n > 0){
-            int digit = n % 10;
-            ans += char('0' + digit); 
-            n /= 10;
-        }
+    string getSorted(int n){
+        string S = to_string(n);
+        sort(S.begin(), S.end());
 
-        sort(ans.begin(), ans.end()); 
-        for(int i = 0; i < 31; i++) { 
-            int pow2 = 1 << i;
-            string s = to_string(pow2);
-            sort(s.begin(), s.end());
-            if(s == ans) return true;
+        return S;
+    }
+    bool reorderedPowerOf2(int n) {
+        string S = getSorted(n);
+        for(int p = 0; p<31; p++){
+            if(S == getSorted(1 << p)){
+                return true;
+            }
         }
-        return false;
+         return false;
     }
 };
-
