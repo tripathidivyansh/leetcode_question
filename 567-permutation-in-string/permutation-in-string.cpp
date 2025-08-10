@@ -1,36 +1,32 @@
 class Solution {
 public:
-    // void Solve(int index, string &s1, string &s2, bool &found) {
-    //     if (found) return; 
-
-    //     if (index == s1.size()) {
-    //         if (s2.find(s1) != string::npos) {
-    //             found = true;
-    //         }
-    //         return;
-    //     }
-
-    //     for (int i = index; i < s1.size(); i++) {
-    //         swap(s1[i], s1[index]);
-    //         Solve(index + 1, s1, s2, found);
-    //         swap(s1[i], s1[index]); 
-    //     }
-    // }
-
-    // bool checkInclusion(string s1, string s2) {
-    //     bool found = false;
-    //     Solve(0, s1, s2, found);
-    //     return found;
-    // }
     bool checkInclusion(string s1, string s2) {
         int n = s1.size();
         int m = s2.size();
+        // if(n > m) return false;
+        // sort(s1.begin(), s1.end());
+        // for(int i = 0; i<=m-n; i++){
+        //     string substr = s2.substr(i, n);
+        //     sort(substr.begin(), substr.end());
+        //     if(s1 == substr)return true;
+        // }
+        // return false;
         if(n > m) return false;
-        sort(s1.begin(), s1.end());
-        for(int i = 0; i<=m-n; i++){
-            string substr = s2.substr(i, n);
-            sort(substr.begin(), substr.end());
-            if(s1 == substr)return true;
+        vector<int> S1_freq(26, 0);
+        vector<int> S2_freq(26, 0);
+        
+        for(auto & ch : s1){
+            S1_freq[ch-'a']++;
+        }
+        int i = 0, j = 0;
+        while(j < m){
+            S2_freq[s2[j] - 'a']++;
+            if(j-i+1 > n){
+                S2_freq[s2[i] - 'a']--;
+                i++;
+            }
+            if(S1_freq == S2_freq) return true;
+            j++;
         }
         return false;
     }
