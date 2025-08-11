@@ -9,29 +9,13 @@
 class Solution {
 public:
     void deleteNode(ListNode* node) {
-        // ListNode* nextNode = node-> next;
-        // node-> val = node-> next-> val;
-        // node-> next = node -> next-> next;
-        // delete nextNode;
-        // ListNode* nextNode = node-> next;
-        // node->val = node-> next-> val;
-        // node-> next = node->next -> next;
-
-        // delete nextNode;
-        if(node == NULL || node->next == NULL){
-            return;
+        ListNode* prev = NULL;
+        while(node != NULL && node->next != NULL){
+            node->val = node->next->val;
+            prev = node;
+            node = node->next;
         }
-        ListNode* temp = node;
-        while(temp != NULL && temp->next != NULL){
-            temp->val = temp->next->val;
-
-            if(temp->next->next == NULL){
-                ListNode* todelete = temp->next;
-                temp->next = NULL;
-                delete todelete;
-                break;
-            }
-            temp= temp->next;
-        }
+        prev->next = NULL;
+        delete(node);
     }
 };
