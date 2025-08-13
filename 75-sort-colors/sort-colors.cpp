@@ -7,16 +7,14 @@ public:
         while(mid <= high){
             if(nums[mid] == 0){
                 swap(nums[mid], nums[low]);
-                low++;
                 mid++;
+                low++;
             }else if(nums[mid] == 1){
                 mid++;
-            }else {
+            }else if(nums[mid] == 2){
                 swap(nums[mid], nums[high]);
                 high--;
             }
-
         }
-        // return low;
     }
 };
