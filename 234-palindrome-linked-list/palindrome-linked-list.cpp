@@ -11,23 +11,49 @@
 class Solution {
 public:
     bool isPalindrome(ListNode* head) {
-        stack<int>St;
-        ListNode* curr = head;
-        while(curr != NULL){
+        // stack<int>St;
+        // ListNode* curr = head;
+        // while(curr != NULL){
 
-            St.push(curr->val);
-            curr = curr->next;
+        //     St.push(curr->val);
+        //     curr = curr->next;
+        // }
+        // curr = head;
+        // while(curr != NULL){
+        //     if(curr->val != St.top()){
+        //         return false;
+        //     }
+        //     curr = curr->next;
+        //     St.pop();
+        // }
+        // return true;
+        
+        /// Second Soln
+        ListNode* Slow = head;
+        ListNode* faSt = head;
+        while(faSt && faSt->next){
+            Slow = Slow->next;
+            faSt = faSt->next->next;
         }
-        curr = head;
-        while(curr != NULL){
-            if(curr->val != St.top()){
+        ListNode* curr = Slow;
+        ListNode* prev = NULL;
+        ListNode* faStnext = NULL;
+        while(curr != NULL){    
+            faStnext= curr->next;
+            curr->next = prev;
+            prev = curr;
+            curr = faStnext;
+        }
+        ListNode* firSt = head;
+        ListNode* Second = prev;
+        while(Second != NULL){
+            if(firSt->val != Second->val){
                 return false;
             }
-            curr = curr->next;
-            St.pop();
+            firSt = firSt->next;
+            Second = Second->next;
         }
+
         return true;
-
-
     }
 };
