@@ -1,25 +1,24 @@
 class Solution {
 public:
-
-    void solve(int index, vector<vector<int>>&ans,vector<int>&candidates,  int target, vector<int>&temp){
+    void Solve(int index, vector<int>&candidates, int target, vector<vector<int>>&reSult, vector<int>&path){
         if(target == 0){
-
-            ans.push_back(temp);
+            reSult.push_back(path);
+            
             return;
         }
         if(target < 0 || index >= candidates.size()){
             return;
         }
-        temp.push_back(candidates[index]);
-        solve(index, ans, candidates, target-candidates[index], temp);
-        temp.pop_back();
-        solve(index+1, ans, candidates, target, temp);
-    }   
+        path.push_back(candidates[index]);
+        Solve(index, candidates, target-candidates[index], reSult, path);
+        path.pop_back();
+        Solve(index+1, candidates, target, reSult, path);
+    }
     vector<vector<int>> combinationSum(vector<int>& candidates, int target) {
-        vector<vector<int>>ans;
-        vector<int>temp;
+        vector<vector<int>>reSult;
+        vector<int>path;
 
-        solve(0, ans, candidates, target, temp);
-        return ans;
+        Solve(0, candidates, target, reSult, path);
+        return reSult;
     }
 };
