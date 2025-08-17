@@ -1,24 +1,32 @@
 class Solution {
 public:
-    void solve(int index, vector<int>&nums, vector<vector<int>>&result, vector<int>&path){
+    void Solve(int index, vector<int>&nums, vector<vector<int>>&reSult, vector<int>&path){
         if(index >= nums.size()){
-            result.push_back(path);
+            reSult.push_back(path);
+
             return;
         }
         path.push_back(nums[index]);
-        solve(index+1, nums, result, path);
+        Solve(index+1, nums, reSult, path);
         while(index + 1 < nums.size() && nums[index] == nums[index+1]){
             index++;
         }
         path.pop_back();
-        solve(index+1, nums, result, path);
+        Solve(index+1, nums, reSult, path);
     }
-    vector<vector<int>> subsetsWithDup(vector<int>& nums) {
-        vector<vector<int>>result;
-        vector<int>path;
 
+    vector<vector<int>> subsetsWithDup(vector<int>& nums) {
+        vector<vector<int>>reSult;
+        vector<int>path;
         sort(nums.begin(), nums.end());
-        solve(0, nums, result, path);
-        return result;
+
+        Solve(0, nums, reSult, path);
+        return reSult;
     }
+
 };
+
+
+
+
+
