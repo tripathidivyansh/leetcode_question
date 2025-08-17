@@ -1,29 +1,32 @@
 class Solution {
 public:
-
-    void solve(vector<int>&candidates, int index, int target, vector<int>&path, vector<vector<int>>&result){
+    void Solve(int index, vector<int>& candidates, int target, vector<vector<int>>&reSult, vector<int>&path){
         if(target == 0){
+            reSult.push_back(path);
 
-            result.push_back(path);
             return;
         }
-        if(target < 0 || index >=candidates.size()){
+        if(target < 0 || index >= candidates.size()){
             return;
         }
         path.push_back(candidates[index]);
-        solve(candidates, index+1, target - candidates[index], path, result);
-        while(index+ 1 < candidates.size() && candidates[index] == candidates[index+1]){
+        Solve(index+1, candidates, target-candidates[index], reSult, path);
+        while(index+1 < candidates.size() && candidates[index] == candidates[index+1]){
             index++;
         }
+
         path.pop_back();
-        solve(candidates, index+1, target, path, result);
+        Solve(index+1, candidates, target, reSult, path);
     }
     vector<vector<int>> combinationSum2(vector<int>& candidates, int target) {
-        vector<vector<int>>result;
+        vector<vector<int>>reSult;
         vector<int>path;
-
         sort(candidates.begin(), candidates.end());
-        solve(candidates, 0, target, path, result);
-        return result;
+        Solve(0, candidates, target, reSult, path);
+        return reSult;
     }
 };
+
+
+
+
