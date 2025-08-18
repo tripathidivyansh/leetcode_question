@@ -1,34 +1,43 @@
-/**
- * Definition for singly-linked list.
- * struct ListNode {
- *     int val;
- *     ListNode *next;
- *     ListNode() : val(0), next(nullptr) {}
- *     ListNode(int x) : val(x), next(nullptr) {}
- *     ListNode(int x, ListNode *next) : val(x), next(next) {}
- * };
- */
 class Solution {
 public:
-    ListNode* rotateRight(ListNode* head, int k) {
-        vector<int>ans;
-        if(!head) return NULL;
-        ListNode* temp = head;
+    ListNode* findKthNode(ListNode* head, int k) {
+        int count = 1;
+        while (head != nullptr) {
+            if (count == k) return head;
+            head = head->next;
+            count++;
+        }
+        return nullptr;
+    }
 
-        while(temp){
-            ans.push_back(temp->val);
-            temp = temp->next;
+    ListNode* rotateRight(ListNode* head, int k) {
+        if (!head || k == 0) return head;
+
+        ListNode* tail = head;
+        int len = 1;
+        while (tail->next) {
+            tail = tail->next;
+            len++;
         }
-        int n = ans.size();
-        k = k %n;
-        reverse(ans.begin(), ans.end());
-        reverse(ans.begin(), ans.begin() + k);
-        reverse(ans.begin() + k, ans.end());
-        temp = head;
-        for (int i = 0; i < n; i++) {
-            temp->val = ans[i];
-            temp = temp->next;
-        }
-        return head;
+
+        k %= len;
+        if (k == 0) return head;
+
+        tail->next = head;
+
+        ListNode* newTail = findKthNode(head, len - k);
+        ListNode* newHead = newTail->next;
+
+        newTail->next = nullptr;
+
+        return newHead;
     }
 };
+
+
+
+
+
+
+
+
