@@ -12,19 +12,41 @@ public:
         //     }
         // }
         // return false;
-        int i = 0, j = m-1;
-        while(i < n &&  j >= 0){
-            if(matrix[i][j] == target){
+        // int i = 0, j = matrix[0].size()-1;
+        // while(i < n &&  j >= 0){
+        //     if(matrix[i][j] == target){
+        //         return true;
+        //     }else if(matrix[i][j] < target){
+        //         i++;
+        //     }else{
+        //         j--;
+        //     }
+        // }
+        // return false;
+       
+        int low = 0, high = n * m - 1;
+        while (low <= high) {
+            int mid = low + (high - low) / 2;
+
+            int row = mid / m;
+            int col = mid % m;
+            if (matrix[row][col] == target) {
                 return true;
-            }else if(matrix[i][j] < target){
-                i++;
-            }else{
-                j--;
+            } else if (matrix[row][col] < target) {
+                low = mid + 1;
+            } else {
+                high = mid - 1;
             }
+
         }
         return false;
     }
 };
+
+
+
+
+
 
 
 
