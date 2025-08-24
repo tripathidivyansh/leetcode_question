@@ -1,16 +1,18 @@
 class Solution {
 public:
-    void solve(vector<vector<char>>& grid, int i, int j, int n, int m){
-        if( i< 0 || j < 0 || i >= n || j >= m|| grid[i][j] == '0'){
-            return;
-        }
+    void Solve(int i, int j, vector<vector<char>>&grid){
+        int n = grid.size();
+        int m = grid[0].size();
+
+        if(i < 0 || j < 0 || i>= n || j>= m || grid[i][j] == '0') return;
         grid[i][j] = '0';
-        solve(grid, i+1, j, n, m);
-        solve(grid, i, j+1, n, m);
-        solve(grid, i-1, j, n, m);
-        solve(grid, i, j-1, n, m);
+        Solve(i, j+1, grid);
+        Solve(i, j-1, grid);
+
+        Solve(i+1, j, grid);
+        Solve(i-1, j, grid);
     }
-    int numIslands(vector<vector<char>>& grid){
+    int numIslands(vector<vector<char>>& grid) {
         int n = grid.size();
         int m = grid[0].size();
 
@@ -18,11 +20,11 @@ public:
         for(int i = 0; i<n; i++){
             for(int j = 0; j<m; j++){
                 if(grid[i][j] == '1'){
+                    Solve(i, j, grid);
                     count++;
-                    solve(grid, i, j, n, m);
                 }
             }
-        }    
+        }
         return count;
     }
 };
