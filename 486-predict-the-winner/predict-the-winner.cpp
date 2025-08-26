@@ -6,9 +6,8 @@ public:
 
         int leftpick = nums[i] - Solve(i+1, j, nums, dp);
         int rightpick = nums[j] - Solve(i, j-1, nums, dp);
-        int maxi = max(leftpick, rightpick);
-        dp[i][j] = maxi;
-        return dp[i][j];
+        return dp[i][j] = max(leftpick, rightpick);
+        // return maxi;
     }
     bool predictTheWinner(vector<int>& nums) {
         int n = nums.size();
@@ -17,6 +16,7 @@ public:
         if(Score >= 0){
             return true;
         }else{
+            
             return false;
         }
     }
