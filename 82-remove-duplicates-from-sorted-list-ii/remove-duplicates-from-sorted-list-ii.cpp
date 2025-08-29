@@ -11,33 +11,21 @@
 class Solution {
 public:
     ListNode* deleteDuplicates(ListNode* head) {
-        if (head == NULL) return NULL;
-        vector<int> arr;
-        ListNode* temp = head;
+        if(!head) return NULL;
+        ListNode* dummy = new ListNode(0, head);
+        ListNode* prev = dummy;
 
-        while (temp) {
-            arr.push_back(temp->val);
-            temp = temp->next; 
-        }
-
-        int n = arr.size();
-        vector<int> ans;
-        for (int i = 0; i < n; i++) {
-            if ((i == 0 || arr[i] != arr[i-1]) && (i == n-1 || arr[i] != arr[i+1])) {
-                ans.push_back(arr[i]);
+        while(head){
+            if(head->next && head->val == head->next->val){
+                while(head->next && head->val == head->next->val){
+                    head = head->next;
+                }
+                prev->next = head->next;
+            }else{
+                prev = prev->next;
             }
+            head = head->next;
         }
-        if (ans.empty()) return NULL;
-        ListNode* newHead = new ListNode(ans[0]);
-        temp = newHead;
-
-        for (int i = 1; i < ans.size(); i++) {
-            temp->next = new ListNode(ans[i]);
-            temp = temp->next;
-        }
-        return newHead;
+        return dummy->next;
     }
 };
-
-
-
