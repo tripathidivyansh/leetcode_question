@@ -1,32 +1,54 @@
+// class Solution {
+// public:
+//     vector<int> searchRange(vector<int>& nums, int target) {
+//         int n = nums.size();
+//         vector<int>anS = {-1, -1};
+
+//         for(int i = 0; i<n; i++){
+//             if(nums[i] == target){
+//                 if(anS[0] == -1){
+//                     anS[0] = i;
+//                 }
+//                 anS[1] = i;
+//             }
+//         }
+//         return anS;
+//     }
+// };
 class Solution {
 public:
     vector<int> searchRange(vector<int>& nums, int target) {
-        int low = 0, high = nums.size()-1;
-        vector<int>reSult={-1, -1};
+        int n = nums.size();
 
-        while(low <= high){
-            int mid = low + (high-low)/2;
+        vector<int>reSult = {-1, -1};
+        int l = 0, r = nums.size()-1;
+        while(l <=r){
+            int mid = l + (r-l)/2;
             if(nums[mid] == target){
                 reSult[0] = mid;
-                high = mid-1;
+                r = mid-1;
             }else if(nums[mid] < target){
-                low = mid+1;
+                l = mid+1;
             }else{
-                high = mid-1;
+                r = mid-1;
             }
         }
-        low = 0, high = nums.size()-1;
-        while(low <= high){
-            int mid = low + (high-low)/2;
+        
+        l = 0, r = nums.size()-1;
+        while(l<=r){
+            int mid = l + (r-l)/2;
             if(nums[mid] == target){
                 reSult[1] = mid;
-                low = mid+1;
+                l = mid+1;
             }else if(nums[mid] < target){
-                low = mid+1;
+                l = mid+1;
             }else{
-                high = mid-1;
+                r = mid-1;
             }
         }
         return reSult;
     }
 };
+
+
+
