@@ -12,10 +12,10 @@ public:
             }
         }
         return l;
+
     }
     int binarySearch(int l, int r, vector<int>&nums, int target){
-    
-        while(l<=r){
+        while(l <= r){
             int mid = l + (r-l)/2;
             if(nums[mid] == target){
                 return mid;
@@ -39,3 +39,5 @@ public:
         return ind;
     }
 };
+
+
