@@ -1,39 +1,18 @@
 class Solution {
 public:
     int lengthOfLongestSubstring(string s) {
-        int n = s.size();
-        int hash[256] = {0};
-        memset(hash, -1, sizeof(hash));
-        int l = 0, r = 0;
-        int maxlen = 0;
-        while(r < n) {
-            if(hash[s[r]] >= l) {
-                l = hash[s[r]] + 1;
+        int n = s.size(), l = 0, r = 0, maxlen = 0;
+        unordered_map<char,int>mp;
+
+        while(r < s.size()){
+            mp[s[r]]++;
+            while(mp[s[r]] > 1){
+                mp[s[l]]--;
+                l++;
             }
-            int len = r - l + 1;
-            maxlen = max(len, maxlen);
-            hash[s[r]] = r;
+            maxlen = max(maxlen, r-l+1);
             r++;
         }
         return maxlen;
     }
 };
-
-
-// class Solution {
-// public:
-//     int lengthOfLongestSubstring(string s) {
-//         int n = s.size();
-//         int maxlen = 0;
-//         for(int i = 0; i<n; i++){
-//             int hash[256] = {0};
-//             for(int j = i; j<n; j++){
-//                 if(hash[s[j]] == 1) break;
-//                 int len = j-i+1;
-//                 maxlen = max(len, maxlen);
-//                 hash[s[j]] = 1;
-//             }
-//         }
-//         return maxlen;
-//     }
-// };
