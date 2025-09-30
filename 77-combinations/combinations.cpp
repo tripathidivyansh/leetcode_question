@@ -1,22 +1,54 @@
 class Solution {
 public:
-
-    void solve(int n, int k, int index, vector<vector<int>>&ans, vector<int>&path){
-        if(path.size() == k){
+    void solve(vector<vector<int>>&ans, vector<int>& path, int start, int n, int k){
+        if(k == 0){
             ans.push_back(path);
+
             return;
         }
-        for(int i = index; i<=n; i++){
-            path.push_back(i);
-            solve(n, k, i+1, ans, path);
-            path.pop_back();
+        if(start > n){
+            return;
+
         }
+        path.push_back(start);
+        solve(ans, path, start+1, n, k-1);
+        path.pop_back();
+        solve(ans, path, start+1, n, k);
     }
     vector<vector<int>> combine(int n, int k) {
-        vector<vector<int>>ans;
         vector<int>path;
+        vector<vector<int>>ans;
+        solve(ans,path, 1, n, k);
 
-        solve(n, k, 1, ans, path);
         return ans;
     }
 };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
